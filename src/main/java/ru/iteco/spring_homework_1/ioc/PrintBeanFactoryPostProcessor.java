@@ -29,7 +29,7 @@ public class PrintBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
             }
 
             if (beanDefinition.isPrototype() && annotation != null) {
-                logger.info(beanName + " contains Scope=Prototype and annotation @CacheResult");
+                logger.warn(beanName + " contains Scope=Prototype and annotation @CacheResult");
             }
         }
     }
