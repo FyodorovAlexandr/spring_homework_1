@@ -2,26 +2,28 @@ package ru.iteco.spring_homework_1.ioc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import ru.iteco.spring_homework_1.ioc.interfaces.ExternalService;
+import ru.iteco.spring_homework_1.ioc.interfaces.Process;
 
 @Component
 public class Flow {
     private static final Logger logger = LoggerFactory.getLogger(Flow.class);
 
-    private final ExternalInfoProcess externalInfoProcess;
-    private final ExternalServiceImpl externalService;
+    private final ExternalService externalService;
+    private final Process process;
 
-    public Flow(@Lazy ExternalInfoProcess externalInfoProcess, ExternalServiceImpl externalService) {
-        this.externalInfoProcess = externalInfoProcess;
+    public Flow(ExternalService externalService, Process process ) {
         this.externalService = externalService;
+        this.process = process;
     }
 
-    void run(Integer id) {
-        if (externalService.getExternalInfo(id).getInfo() != null) {
-            externalInfoProcess.run(externalService.getExternalInfo(id));
+    public void run(Integer id){
+        ExternalInfo externalInfo = externalService.getExternalInfo(id);
+        if (externalInfo.getInfo() != null) {
+            process.run(externalInfo);
         } else {
-            logger.info(String.valueOf(externalInfoProcess.getClass()));
+            logger.info("Not run process: {}", externalInfo);
         }
     }
 }

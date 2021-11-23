@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.iteco.spring_homework_1.ioc.anotations.CacheResult;
 import ru.iteco.spring_homework_1.ioc.interfaces.Process;
 
-import javax.cache.annotation.CacheResult;
-
 @Lazy
-@CacheResult
 @Scope("prototype")
 @Component()
 public class ExternalInfoProcess implements Process {
